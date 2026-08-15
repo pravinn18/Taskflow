@@ -6,6 +6,7 @@ const cookieOptions = {
   httpOnly: true,
   secure: true,
   sameSite: "none",
+  partitioned: true,
   path: "/",
   maxAge: 7 * 24 * 60 * 60 * 1000,
 };
@@ -48,10 +49,17 @@ export const register = async (req, res) => {
       password: hashedPassword,
     });
 
-    const token = generateToken(user._id);
+   const token = generateToken(user._id);
 
-    res.cookie("token", token, cookieOptions);
+   console.log("Setting auth cookie", {
+     nodeEnv: process.env.NODE_ENV,
+     secure: cookieOptions.secure,
+     sameSite: cookieOptions.sameSite,
+     partitioned: cookieOptions.partitioned,
+   });
 
+   res.cookie("token", token, cookieOptions);
+   
     res.status(201).json({
       success: true,
       message: "Account created successfully",
