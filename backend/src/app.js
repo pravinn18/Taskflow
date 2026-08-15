@@ -14,6 +14,8 @@ import invitationRoutes from "./routes/invitationRoutes.js";
 
 const app = express();
 
+app.set("trust proxy", 1);
+
 const allowedOrigins = [
   "http://localhost:5173",
   "https://taskflow-work-space.vercel.app",
@@ -22,7 +24,7 @@ const allowedOrigins = [
 app.use(
   cors({
     origin: function (origin, callback) {
-      // Allow requests without an origin (Postman, server-to-server, etc.)
+     
       if (!origin) return callback(null, true);
 
       if (allowedOrigins.includes(origin)) {
