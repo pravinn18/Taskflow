@@ -95,7 +95,7 @@ const Dashboard = () => {
 
   if (loading) {
     return (
-      <div className="mx-auto max-w-7xl">
+      <div className="mx-auto w-full max-w-7xl px-0 sm:px-1 md:px-2 lg:px-0">
         <div className="mb-8 animate-pulse">
           <div className="h-8 w-40 rounded-lg bg-slate-200" />
 
@@ -147,9 +147,7 @@ const Dashboard = () => {
           )}
         </div>
 
-        <div className="flex items-center gap-3">
-        
-
+        <div className="flex w-full items-center gap-3 sm:w-auto">
           {isAdmin && (
             <button
               onClick={() => {
@@ -171,9 +169,7 @@ const Dashboard = () => {
                 Something went wrong
               </p>
 
-              <p className="mt-1 text-sm text-red-600">
-                {error}
-              </p>
+              <p className="mt-1 text-sm text-red-600">{error}</p>
             </div>
 
             <button
@@ -202,9 +198,9 @@ const Dashboard = () => {
               </p>
 
               <p className="mt-1 text-sm text-blue-600">
-                You can view your available projects and work on
-                assigned tasks. Project creation and management
-                functions are restricted to the owner/developer.
+                You can view your available projects and work on assigned tasks.
+                Project creation and management functions are restricted to the
+                owner/developer.
               </p>
             </div>
           </div>
@@ -242,20 +238,17 @@ const Dashboard = () => {
       )}
 
       {projects.length > 0 && (
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {projects.map((project) => (
             <div
               key={project._id}
-              onClick={() =>
-                navigate(`/projects/${project._id}`)
-              }
+              onClick={() => navigate(`/projects/${project._id}`)}
               className="group cursor-pointer rounded-xl border border-slate-200 bg-white p-5 shadow-sm transition hover:-translate-y-0.5 hover:border-indigo-200 hover:shadow-md"
             >
               <div
                 className="mb-5 h-10 w-10 rounded-lg"
                 style={{
-                  backgroundColor:
-                    project.color || "#6366f1",
+                  backgroundColor: project.color || "#6366f1",
                 }}
               />
 
@@ -290,8 +283,7 @@ const Dashboard = () => {
             }
           }}
         >
-          <div className="w-full max-w-md rounded-2xl bg-white p-6 shadow-xl">
-          
+          <div className="w-full max-w-md rounded-2xl bg-white p-4 shadow-xl sm:p-6">
             <div className="mb-6 flex items-start justify-between">
               <div>
                 <h2 className="text-lg font-semibold text-slate-900">
@@ -312,10 +304,7 @@ const Dashboard = () => {
               </button>
             </div>
 
-            <form
-              onSubmit={handleCreateProject}
-              className="space-y-5"
-            >
+            <form onSubmit={handleCreateProject} className="space-y-5">
               <div>
                 <label className="mb-2 block text-sm font-medium text-slate-700">
                   Project Name
@@ -324,9 +313,7 @@ const Dashboard = () => {
                 <input
                   type="text"
                   value={projectName}
-                  onChange={(e) =>
-                    setProjectName(e.target.value)
-                  }
+                  onChange={(e) => setProjectName(e.target.value)}
                   placeholder="e.g. TaskFlow SaaS Platform"
                   className="w-full rounded-lg border border-slate-200 px-3 py-2.5 text-sm outline-none transition focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100"
                   required
@@ -341,9 +328,7 @@ const Dashboard = () => {
 
                 <textarea
                   value={projectDescription}
-                  onChange={(e) =>
-                    setProjectDescription(e.target.value)
-                  }
+                  onChange={(e) => setProjectDescription(e.target.value)}
                   placeholder="Describe your project..."
                   rows={4}
                   className="w-full resize-none rounded-lg border border-slate-200 px-3 py-2.5 text-sm outline-none transition focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100"
@@ -360,20 +345,16 @@ const Dashboard = () => {
                   <input
                     type="color"
                     value={projectColor}
-                    onChange={(e) =>
-                      setProjectColor(e.target.value)
-                    }
+                    onChange={(e) => setProjectColor(e.target.value)}
                     className="h-10 w-12 cursor-pointer rounded-lg border border-slate-200 bg-white p-1"
                     disabled={creating}
                   />
 
-                  <span className="text-sm text-slate-500">
-                    {projectColor}
-                  </span>
+                  <span className="text-sm text-slate-500">{projectColor}</span>
                 </div>
               </div>
 
-              <div className="flex justify-end gap-3 pt-2">
+              <div className="flex flex-col-reverse gap-3 pt-2 sm:flex-row sm:justify-end">
                 <button
                   type="button"
                   onClick={() => {
@@ -397,9 +378,7 @@ const Dashboard = () => {
                       : "bg-indigo-600 hover:bg-indigo-700"
                   }`}
                 >
-                  {creating
-                    ? "Creating..."
-                    : "Create Project"}
+                  {creating ? "Creating..." : "Create Project"}
                 </button>
               </div>
             </form>

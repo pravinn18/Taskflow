@@ -16,11 +16,8 @@ const AppLayout = () => {
 
 
   return (
-    <div className="min-h-screen bg-slate-50">
-
+    <div className="min-h-screen overflow-x-hidden bg-slate-50">
       <aside className="fixed inset-y-0 left-0 z-40 hidden w-60 flex-col bg-slate-950 text-white md:flex">
-  
-
         <div className="flex h-16 items-center gap-3 border-b border-slate-800 px-5">
           <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-indigo-600 text-sm font-bold">
             T
@@ -28,7 +25,6 @@ const AppLayout = () => {
 
           <span className="text-lg font-semibold">TaskFlow</span>
         </div>
-
 
         <nav className="flex-1 p-3">
           <NavLink
@@ -45,7 +41,6 @@ const AppLayout = () => {
             Dashboard
           </NavLink>
         </nav>
-
 
         <div className="border-t border-slate-800 p-3">
           <div className="mb-2 flex items-center gap-3 rounded-lg p-2">
@@ -70,38 +65,28 @@ const AppLayout = () => {
         </div>
       </aside>
 
-
       <div className="md:pl-60">
-
-        <header className="sticky top-0 z-30 flex h-16 items-center justify-between border-b border-slate-200 bg-white/95 px-5 backdrop-blur">
-      
-
-          <div>
-            <span className="text-sm font-medium text-slate-500">
+        <header className="sticky top-0 z-30 flex h-16 items-center justify-between border-b border-slate-200 bg-white/95 px-3 backdrop-blur sm:px-5">
+          <div className="min-w-0">
+            <span className="truncate text-xs font-medium text-slate-500 sm:text-sm">
               Workspace
             </span>
           </div>
 
-
-          <div className="flex items-center gap-3">
-
+          <div className="flex shrink-0 items-center gap-1.5 sm:gap-3">
             <button
               type="button"
-              className="flex h-8 w-8 items-center justify-center rounded-lg border border-slate-200 text-sm text-slate-500 transition hover:bg-slate-50"
+              className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-slate-200 text-sm text-slate-500 transition hover:bg-slate-50"
             >
               ?
             </button>
 
-
             <NotificationBell />
-
-
-            <div className="flex h-8 w-8 items-center justify-center rounded-full bg-indigo-600 text-sm font-semibold text-white">
+            <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-indigo-600 text-sm font-semibold text-white">
               {user?.name?.charAt(0)?.toUpperCase() || "U"}
             </div>
           </div>
         </header>
-
 
         <main className="p-4 sm:p-6 lg:p-8">
           <Outlet />

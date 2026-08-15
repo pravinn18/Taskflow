@@ -213,7 +213,7 @@ const ProjectPage = () => {
 
   if (loading || loadingUser) {
     return (
-      <div className="mx-auto max-w-7xl">
+      <div className="mx-auto w-full max-w-7xl px-2 sm:px-4 lg:px-6">
         <div className="mb-6 animate-pulse">
           <div className="h-8 w-64 rounded-lg bg-slate-200" />
 
@@ -265,7 +265,7 @@ const ProjectPage = () => {
   return (
     <div className="mx-auto max-w-7xl">
       <header>
-        <div className="mb-6 flex flex-col justify-between gap-4 lg:flex-row lg:items-center">
+        <div className="mb-6 flex flex-col gap-4 sm:gap-5 lg:flex-row lg:items-center lg:justify-between">
           <div className="flex items-start gap-3">
             <button
               onClick={() => navigate("/dashboard")}
@@ -276,7 +276,7 @@ const ProjectPage = () => {
 
             <div>
               <div className="flex flex-wrap items-center gap-3">
-                <h1 className="text-2xl font-bold tracking-tight text-slate-900">
+                <h1 className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl">
                   {project?.name}
                 </h1>
 
@@ -303,7 +303,7 @@ const ProjectPage = () => {
           {canManageProject && (
             <button
               onClick={() => setShowTaskModal(true)}
-              className="rounded-lg bg-indigo-600 px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-indigo-700"
+              className="w-full rounded-lg bg-indigo-600 px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-indigo-700 sm:w-auto"
             >
               + Add Task
             </button>
@@ -341,7 +341,7 @@ const ProjectPage = () => {
       )}
 
       {error && (
-        <div className="mb-5 flex items-center justify-between rounded-xl border border-red-200 bg-red-50 px-4 py-3">
+        <div className="mb-5 flex flex-col gap-2 rounded-xl border border-red-200 bg-red-50 px-4 py-3 sm:flex-row sm:items-center sm:justify-between">
           <p className="text-sm text-red-700">{error}</p>
 
           <button
@@ -353,8 +353,8 @@ const ProjectPage = () => {
         </div>
       )}
 
-      <div className="mb-5 flex flex-col gap-3 sm:flex-row">
-        <div className="flex flex-1 items-center gap-2 rounded-lg border border-slate-200 bg-white px-3">
+      <div className="mb-5 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+        <div className="flex w-full flex-1 items-center gap-2 rounded-lg border border-slate-200 bg-white px-3 sm:min-w-[220px]">
           <span className="text-slate-400">🔍</span>
 
           <input
@@ -369,7 +369,7 @@ const ProjectPage = () => {
         <select
           value={priorityFilter}
           onChange={(e) => setPriorityFilter(e.target.value)}
-          className="rounded-lg border border-slate-200 bg-white px-3 py-2.5 text-sm text-slate-600 outline-none transition focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100"
+          className="w-full rounded-lg border border-slate-200 bg-white px-3 py-2.5 text-sm text-slate-600 outline-none transition focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100 sm:w-auto"
         >
           <option value="all">All priorities</option>
 
@@ -385,7 +385,7 @@ const ProjectPage = () => {
         <select
           value={statusFilter}
           onChange={(e) => setStatusFilter(e.target.value)}
-          className="rounded-lg border border-slate-200 bg-white px-3 py-2.5 text-sm text-slate-600 outline-none transition focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100"
+          className="w-full rounded-lg border border-slate-200 bg-white px-3 py-2.5 text-sm text-slate-600 outline-none transition focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100 sm:w-auto"
         >
           <option value="all">All statuses</option>
 
@@ -461,7 +461,7 @@ const ProjectPage = () => {
           </div>
         </div>
 
-        <div className="mb-3 flex items-center justify-between">
+        <div className="mb-3 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
           <div>
             <h2 className="text-lg font-semibold text-slate-900">
               Kanban Board
@@ -479,8 +479,8 @@ const ProjectPage = () => {
         </div>
 
         <div className="overflow-x-auto pb-4">
-          <div className="grid min-w-[1000px] grid-cols-4 gap-4">
-            <section className="min-h-[500px] rounded-xl bg-slate-100 p-3">
+          <div className="grid min-w-[900px] grid-cols-4 gap-3 sm:gap-4 lg:min-w-[1000px]">
+            <section className="min-h-[450px] rounded-xl bg-slate-100 p-3 sm:min-h-[500px]">
               <div className="mb-3 flex items-center justify-between px-1">
                 <div className="flex items-center gap-2">
                   <h3 className="text-xs font-bold uppercase tracking-wide text-slate-600">
@@ -511,7 +511,7 @@ const ProjectPage = () => {
               </div>
             </section>
 
-            <section className="min-h-[500px] rounded-xl bg-slate-100 p-3">
+            <section className="min-h-[450px] rounded-xl bg-slate-100 p-3 sm:min-h-[500px]">
               <div className="mb-3 flex items-center justify-between px-1">
                 <div className="flex items-center gap-2">
                   <h3 className="text-xs font-bold uppercase tracking-wide text-slate-600">
@@ -542,7 +542,7 @@ const ProjectPage = () => {
               </div>
             </section>
 
-            <section className="min-h-[500px] rounded-xl bg-slate-100 p-3">
+            <section className="min-h-[450px] rounded-xl bg-slate-100 p-3 sm:min-h-[500px]">
               <div className="mb-3 flex items-center justify-between px-1">
                 <div className="flex items-center gap-2">
                   <h3 className="text-xs font-bold uppercase tracking-wide text-slate-600">
@@ -572,8 +572,7 @@ const ProjectPage = () => {
                 )}
               </div>
             </section>
-
-            <section className="min-h-[500px] rounded-xl bg-slate-100 p-3">
+            <section className="min-h-[450px] rounded-xl bg-slate-100 p-3 sm:min-h-[500px]">
               <div className="mb-3 flex items-center justify-between px-1">
                 <div className="flex items-center gap-2">
                   <h3 className="text-xs font-bold uppercase tracking-wide text-slate-600">

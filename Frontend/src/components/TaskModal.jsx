@@ -79,16 +79,18 @@ const TaskModal = ({ projectId, project, onClose, onCreated }) => {
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-2 sm:p-4"
       onClick={onClose}
     >
       <div
-        className="w-full max-w-lg max-h-[90vh] overflow-y-auto rounded-xl bg-white p-6 shadow-xl"
+        className="max-h-[95vh] w-full max-w-lg overflow-y-auto rounded-xl bg-white p-4 shadow-xl sm:max-h-[90vh] sm:p-6"
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="mb-5 flex items-center justify-between">
+        <div className="mb-5 flex items-start justify-between gap-3">
           <div>
-            <h2 className="text-xl font-bold text-slate-900">Create Task</h2>
+            <h2 className="text-lg font-bold text-slate-900 sm:text-xl">
+              Create Task
+            </h2>
 
             <p className="mt-1 text-sm text-slate-500">
               Add a new task to this project.
@@ -178,7 +180,6 @@ const TaskModal = ({ projectId, project, onClose, onCreated }) => {
           </div>
 
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-            
             <div>
               <label className="mb-1.5 block text-sm font-medium text-slate-700">
                 Priority
@@ -250,12 +251,12 @@ const TaskModal = ({ projectId, project, onClose, onCreated }) => {
             </p>
           </div>
 
-          <div className="flex justify-end gap-3 border-t border-slate-100 pt-5">
+          <div className="flex flex-col-reverse gap-2 border-t border-slate-100 pt-5 sm:flex-row sm:justify-end sm:gap-3">
             <button
               type="button"
               onClick={onClose}
               disabled={loading}
-              className="rounded-lg border border-slate-200 bg-white px-4 py-2.5 text-sm font-medium text-slate-600 transition hover:bg-slate-50 disabled:cursor-not-allowed disabled:opacity-50"
+              className="w-full rounded-lg border border-slate-200 bg-white px-4 py-2.5 text-sm font-medium text-slate-600 transition hover:bg-slate-50 disabled:cursor-not-allowed disabled:opacity-50 sm:w-auto"
             >
               Cancel
             </button>
@@ -263,7 +264,7 @@ const TaskModal = ({ projectId, project, onClose, onCreated }) => {
             <button
               type="submit"
               disabled={loading}
-              className="rounded-lg bg-indigo-600 px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-indigo-700 disabled:cursor-not-allowed disabled:opacity-50"
+              className="w-full rounded-lg bg-indigo-600 px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-indigo-700 disabled:cursor-not-allowed disabled:opacity-50 sm:w-auto"
             >
               {loading ? "Creating..." : "Create Task"}
             </button>

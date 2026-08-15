@@ -50,9 +50,9 @@ const TaskCard = ({ task, onStatusChange, onClick }) => {
   return (
     <div
       onClick={onClick}
-      className="cursor-pointer rounded-lg border border-slate-200 bg-white p-3 shadow-sm transition hover:border-indigo-200 hover:shadow-md"
+      className="w-full min-w-0 cursor-pointer rounded-lg border border-slate-200 bg-white p-3 shadow-sm transition hover:border-indigo-200 hover:shadow-md sm:p-3.5"
     >
-      <div className="flex items-start justify-between gap-2">
+      <div className="flex min-w-0 items-start justify-between gap-2">
         <h4 className="min-w-0 flex-1 break-words text-sm font-semibold text-slate-800">
           {task.title}
         </h4>
@@ -67,7 +67,7 @@ const TaskCard = ({ task, onStatusChange, onClick }) => {
       </div>
 
       {task.description && (
-        <p className="mt-2 line-clamp-2 text-xs leading-5 text-slate-500">
+        <p className="mt-2 line-clamp-2 break-words text-xs leading-5 text-slate-500">
           {task.description}
         </p>
       )}
@@ -84,9 +84,9 @@ const TaskCard = ({ task, onStatusChange, onClick }) => {
           ))}
         </div>
       )}
-      <div className="mt-3 border-t border-slate-100 pt-3">
+      <div className="mt-3 min-w-0 border-t border-slate-100 pt-3">
         {assignee && typeof assignee === "object" ? (
-          <div className="flex items-center gap-2">
+          <div className="flex min-w-0 items-center gap-2">
             {assigneeAvatar ? (
               <img
                 src={assigneeAvatar}
@@ -112,29 +112,23 @@ const TaskCard = ({ task, onStatusChange, onClick }) => {
             </div>
           </div>
         ) : (
-          <div className="flex items-center gap-2">
+          <div className="flex min-w-0 items-center gap-2">
             <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-slate-100 text-[11px] font-semibold text-slate-400">
               ?
             </div>
 
-            <span className="text-[11px] text-slate-400">
-              Unassigned
-            </span>
+            <span className="text-[11px] text-slate-400">Unassigned</span>
           </div>
         )}
       </div>
 
       {formattedDueDate && (
-        <div className="mt-3 flex items-center gap-1.5">
-          <span className="text-xs">
-            {isOverdue ? "⚠️" : "📅"}
-          </span>
+        <div className="mt-3 flex min-w-0 items-center gap-1.5">
+          <span className="text-xs">{isOverdue ? "⚠️" : "📅"}</span>
 
           <span
-            className={`text-[10px] font-medium ${
-              isOverdue
-                ? "text-red-600"
-                : "text-slate-500"
+            className={`min-w-0 break-words text-[10px] font-medium ${
+              isOverdue ? "text-red-600" : "text-slate-500"
             }`}
           >
             {isOverdue ? "Overdue · " : "Due · "}
@@ -143,7 +137,7 @@ const TaskCard = ({ task, onStatusChange, onClick }) => {
         </div>
       )}
 
-      <div className="mt-3 flex items-center justify-between gap-2">
+      <div className="mt-3 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
         <span className="text-[10px] font-semibold uppercase text-slate-400">
           {statusLabels[task.status] || task.status}
         </span>
@@ -156,18 +150,13 @@ const TaskCard = ({ task, onStatusChange, onClick }) => {
           onChange={(e) => {
             e.stopPropagation();
 
-            onStatusChange(
-              task._id,
-              e.target.value,
-            );
+            onStatusChange(task._id, e.target.value);
           }}
-          className="rounded border border-slate-200 bg-white px-1.5 py-1 text-[10px] text-slate-500 outline-none transition focus:border-indigo-400 focus:ring-1 focus:ring-indigo-100"
+          className="w-full rounded border border-slate-200 bg-white px-1.5 py-1 text-[10px] text-slate-500 outline-none transition focus:border-indigo-400 focus:ring-1 focus:ring-indigo-100 sm:w-auto"
         >
           <option value="backlog">Backlog</option>
           <option value="todo">Todo</option>
-          <option value="in-progress">
-            In Progress
-          </option>
+          <option value="in-progress">In Progress</option>
           <option value="done">Done</option>
         </select>
       </div>

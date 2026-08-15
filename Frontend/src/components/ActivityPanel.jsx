@@ -120,7 +120,9 @@ const ActivityPanel = ({ taskId }) => {
   return (
     <div className="mt-8 border-t border-slate-200 pt-6">
       <div className="mb-5">
-        <h3 className="text-base font-semibold text-slate-900">Activity</h3>
+        <h3 className="text-sm font-semibold text-slate-900 sm:text-base">
+          Activity
+        </h3>
 
         <p className="mt-1 text-xs text-slate-500">
           Track changes and actions performed on this task.
@@ -128,11 +130,10 @@ const ActivityPanel = ({ taskId }) => {
       </div>
 
       {error && (
-        <div className="mb-4 rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+        <div className="mb-4 rounded-lg border border-red-200 bg-red-50 px-3 py-3 text-xs text-red-700 sm:px-4 sm:text-sm">
           {error}
         </div>
       )}
-
 
       {loading ? (
         <div className="space-y-4">
@@ -149,8 +150,7 @@ const ActivityPanel = ({ taskId }) => {
           ))}
         </div>
       ) : activities.length === 0 ? (
-
-        <div className="rounded-xl border border-dashed border-slate-300 p-8 text-center">
+        <div className="rounded-xl border border-dashed border-slate-300 p-5 text-center sm:p-8">
           <div className="text-2xl">◷</div>
 
           <p className="mt-2 text-sm font-medium text-slate-700">
@@ -162,9 +162,7 @@ const ActivityPanel = ({ taskId }) => {
           </p>
         </div>
       ) : (
-        <div className="relative space-y-5">
-        
-
+        <div className="relative space-y-4 sm:space-y-5">
           <div className="absolute bottom-2 left-4 top-2 w-px bg-slate-200" />
 
           {activities.map((activity) => {
@@ -173,17 +171,17 @@ const ActivityPanel = ({ taskId }) => {
             const userName = user?.name || "Unknown user";
 
             return (
-              <div key={activity._id} className="relative flex gap-3">
-             
-
+              <div
+                key={activity._id}
+                className="relative flex gap-2.5 sm:gap-3"
+              >
                 <div className="relative z-10 flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-slate-200 bg-white text-xs font-semibold text-slate-500">
                   {getActivityIcon(activity.type)}
                 </div>
 
-
                 <div className="min-w-0 flex-1 pt-0.5">
                   <div className="flex flex-wrap items-center gap-2">
-                    <p className="text-sm font-semibold text-slate-800">
+                    <p className="text-xs font-semibold text-slate-800 sm:text-sm">
                       {userName}
                     </p>
 
@@ -193,21 +191,20 @@ const ActivityPanel = ({ taskId }) => {
                       </span>
                     )}
 
-                    <span className="text-xs text-slate-400">
+                    <span className="text-[10px] text-slate-400 sm:text-xs">
                       {formatDate(activity.createdAt)}
                     </span>
                   </div>
 
-                  <p className="mt-1 text-sm leading-6 text-slate-600">
+                  <p className="mt-1 break-words text-xs leading-5 text-slate-600 sm:text-sm sm:leading-6">
                     {activity.message}
                   </p>
-
 
                   {(activity.oldValue !== null ||
                     activity.newValue !== null) && (
                     <div className="mt-2 flex flex-wrap items-center gap-2 text-xs">
                       {activity.oldValue !== null && (
-                        <span className="rounded-md bg-red-50 px-2 py-1 text-red-600">
+                        <span className="max-w-full break-words rounded-md bg-red-50 px-2 py-1 text-red-600">
                           {String(activity.oldValue)}
                         </span>
                       )}
@@ -218,7 +215,7 @@ const ActivityPanel = ({ taskId }) => {
                         )}
 
                       {activity.newValue !== null && (
-                        <span className="rounded-md bg-emerald-50 px-2 py-1 text-emerald-600">
+                        <span className="max-w-full break-words rounded-md bg-emerald-50 px-2 py-1 text-emerald-600">
                           {String(activity.newValue)}
                         </span>
                       )}

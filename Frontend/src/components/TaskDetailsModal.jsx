@@ -699,41 +699,32 @@ const TaskDetailsModal = ({
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-2 sm:p-4"
       onMouseDown={(e) => {
-        if (
-          e.target ===
-          e.currentTarget
-        ) {
+        if (e.target === e.currentTarget) {
           onClose();
         }
       }}
     >
-      <div className="flex max-h-[92vh] w-full max-w-3xl flex-col overflow-hidden rounded-2xl bg-white shadow-2xl">
-   
-
-        <div className="flex items-start justify-between border-b border-slate-200 px-6 py-5">
+      <div className="flex max-h-[96vh] w-full max-w-3xl flex-col overflow-hidden rounded-xl bg-white shadow-2xl sm:max-h-[90vh] sm:rounded-2xl">
+        <div className="flex items-start justify-between border-b border-slate-200 px-4 py-4 sm:px-6 sm:py-5">
           <div>
             <div className="flex flex-wrap items-center gap-2">
-              <h2 className="text-lg font-semibold text-slate-900">
+              <h2 className="text-base font-semibold text-slate-900 sm:text-lg">
                 Task Details
               </h2>
 
               <span
                 className={`rounded-full px-2.5 py-1 text-xs font-medium ${
-                  priorityStyles[
-                    priority
-                  ] ||
-                  priorityStyles.medium
+                  priorityStyles[priority] || priorityStyles.medium
                 }`}
               >
                 {priority}
               </span>
             </div>
 
-            <p className="mt-1 text-sm text-slate-500">
-              View task information,
-              comments, and activity.
+            <p className="mt-1 text-xs text-slate-500 sm:text-sm">
+              View task information, comments, and activity.
             </p>
           </div>
 
@@ -746,9 +737,7 @@ const TaskDetailsModal = ({
           </button>
         </div>
 
-       
-
-        <div className="border-b border-slate-100 px-6 pt-4">
+        <div className="border-b border-slate-100 px-4 pt-3 sm:px-6 sm:pt-4">
           {canManageTask ? (
             <div className="rounded-lg border border-indigo-100 bg-indigo-50 px-4 py-3">
               <p className="text-xs font-semibold text-indigo-700">
@@ -756,9 +745,7 @@ const TaskDetailsModal = ({
               </p>
 
               <p className="mt-1 text-xs text-indigo-600">
-                You can edit, reassign,
-                change status, and
-                delete this task.
+                You can edit, reassign, change status, and delete this task.
               </p>
             </div>
           ) : isAssignedEmployee ? (
@@ -768,25 +755,20 @@ const TaskDetailsModal = ({
               </p>
 
               <p className="mt-1 text-xs text-emerald-600">
-                You can update the
-                status of this task.
+                You can update the status of this task.
               </p>
             </div>
           ) : (
             <div className="rounded-lg border border-slate-200 bg-slate-50 px-4 py-3">
-              <p className="text-xs font-semibold text-slate-600">
-                View Only
-              </p>
+              <p className="text-xs font-semibold text-slate-600">View Only</p>
 
               <p className="mt-1 text-xs text-slate-500">
-                You don't have
-                permission to modify
-                this task.
+                You don't have permission to modify this task.
               </p>
             </div>
           )}
         </div>
-        <div className="overflow-y-auto px-6 py-5">
+        <div className="min-h-0 overflow-y-auto px-4 py-4 sm:px-6 sm:py-5">
           {error && (
             <div className="mb-5 rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
               {error}
@@ -794,8 +776,7 @@ const TaskDetailsModal = ({
           )}
 
           <form onSubmit={handleUpdate}>
-            <div className="space-y-5">
-
+            <div className="space-y-4 sm:space-y-5">
               <div>
                 <label className="mb-1.5 block text-sm font-medium text-slate-700">
                   Title
@@ -804,21 +785,12 @@ const TaskDetailsModal = ({
                 <input
                   type="text"
                   value={title}
-                  onChange={(e) =>
-                    setTitle(
-                      e.target.value,
-                    )
-                  }
-                  disabled={
-                    !canEditTask ||
-                    loading ||
-                    deleting
-                  }
+                  onChange={(e) => setTitle(e.target.value)}
+                  disabled={!canEditTask || loading || deleting}
                   maxLength={150}
                   className="w-full rounded-lg border border-slate-200 px-3 py-2.5 text-sm outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100 disabled:bg-slate-50"
                 />
               </div>
-
 
               <div>
                 <label className="mb-1.5 block text-sm font-medium text-slate-700">
@@ -827,23 +799,14 @@ const TaskDetailsModal = ({
 
                 <textarea
                   value={description}
-                  onChange={(e) =>
-                    setDescription(
-                      e.target.value,
-                    )
-                  }
-                  disabled={
-                    !canEditTask ||
-                    loading ||
-                    deleting
-                  }
+                  onChange={(e) => setDescription(e.target.value)}
+                  disabled={!canEditTask || loading || deleting}
                   rows={5}
                   maxLength={2000}
                   placeholder="Add a description..."
                   className="w-full resize-none rounded-lg border border-slate-200 px-3 py-2.5 text-sm outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100 disabled:bg-slate-50"
                 />
               </div>
-
 
               <div>
                 <label className="mb-1.5 block text-sm font-medium text-slate-700">
@@ -852,43 +815,23 @@ const TaskDetailsModal = ({
 
                 <select
                   value={assignee}
-                  onChange={(e) =>
-                    setAssignee(
-                      e.target.value,
-                    )
-                  }
+                  onChange={(e) => setAssignee(e.target.value)}
                   disabled={
-                    !canEditTask ||
-                    loading ||
-                    deleting ||
-                    loadingMembers
+                    !canEditTask || loading || deleting || loadingMembers
                   }
                   className="w-full rounded-lg border border-slate-200 bg-white px-3 py-2.5 text-sm outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100 disabled:bg-slate-50"
                 >
                   <option value="">
-                    {loadingMembers
-                      ? "Loading employees..."
-                      : "Unassigned"}
+                    {loadingMembers ? "Loading employees..." : "Unassigned"}
                   </option>
 
-                  {members.map(
-                    (member) => (
-                      <option
-                        key={
-                          member._id
-                        }
-                        value={
-                          member._id
-                        }
-                      >
-                        {member.name}
+                  {members.map((member) => (
+                    <option key={member._id} value={member._id}>
+                      {member.name}
 
-                        {member.email
-                          ? ` — ${member.email}`
-                          : ""}
-                      </option>
-                    ),
-                  )}
+                      {member.email ? ` — ${member.email}` : ""}
+                    </option>
+                  ))}
                 </select>
               </div>
 
@@ -900,16 +843,8 @@ const TaskDetailsModal = ({
                 <input
                   type="date"
                   value={dueDate}
-                  onChange={(e) =>
-                    setDueDate(
-                      e.target.value,
-                    )
-                  }
-                  disabled={
-                    !canEditTask ||
-                    loading ||
-                    deleting
-                  }
+                  onChange={(e) => setDueDate(e.target.value)}
+                  disabled={!canEditTask || loading || deleting}
                   className="w-full rounded-lg border border-slate-200 bg-white px-3 py-2.5 text-sm outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100 disabled:bg-slate-50"
                 />
               </div>
@@ -922,33 +857,17 @@ const TaskDetailsModal = ({
 
                   <select
                     value={priority}
-                    onChange={(e) =>
-                      setPriority(
-                        e.target.value,
-                      )
-                    }
-                    disabled={
-                      !canEditTask ||
-                      loading ||
-                      deleting
-                    }
+                    onChange={(e) => setPriority(e.target.value)}
+                    disabled={!canEditTask || loading || deleting}
                     className="w-full rounded-lg border border-slate-200 bg-white px-3 py-2.5 text-sm outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100 disabled:bg-slate-50"
                   >
-                    <option value="low">
-                      Low
-                    </option>
+                    <option value="low">Low</option>
 
-                    <option value="medium">
-                      Medium
-                    </option>
+                    <option value="medium">Medium</option>
 
-                    <option value="high">
-                      High
-                    </option>
+                    <option value="high">High</option>
 
-                    <option value="urgent">
-                      Urgent
-                    </option>
+                    <option value="urgent">Urgent</option>
                   </select>
                 </div>
 
@@ -959,38 +878,20 @@ const TaskDetailsModal = ({
 
                   <select
                     value={status}
-                    onChange={(e) =>
-                      handleStatusChange(
-                        e.target
-                          .value,
-                      )
-                    }
-                    disabled={
-                      !canUpdateStatus ||
-                      loading ||
-                      deleting
-                    }
+                    onChange={(e) => handleStatusChange(e.target.value)}
+                    disabled={!canUpdateStatus || loading || deleting}
                     className="w-full rounded-lg border border-slate-200 bg-white px-3 py-2.5 text-sm outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100 disabled:bg-slate-50"
                   >
-                    <option value="backlog">
-                      Backlog
-                    </option>
+                    <option value="backlog">Backlog</option>
 
-                    <option value="todo">
-                      Todo
-                    </option>
+                    <option value="todo">Todo</option>
 
-                    <option value="in-progress">
-                      In Progress
-                    </option>
+                    <option value="in-progress">In Progress</option>
 
-                    <option value="done">
-                      Done
-                    </option>
+                    <option value="done">Done</option>
                   </select>
                 </div>
               </div>
-
 
               <div>
                 <label className="mb-1.5 block text-sm font-medium text-slate-700">
@@ -1000,79 +901,45 @@ const TaskDetailsModal = ({
                 <input
                   type="text"
                   value={labels}
-                  onChange={(e) =>
-                    setLabels(
-                      e.target.value,
-                    )
-                  }
-                  disabled={
-                    !canEditTask ||
-                    loading ||
-                    deleting
-                  }
+                  onChange={(e) => setLabels(e.target.value)}
+                  disabled={!canEditTask || loading || deleting}
                   placeholder="frontend, bug, api"
                   className="w-full rounded-lg border border-slate-200 px-3 py-2.5 text-sm outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100 disabled:bg-slate-50"
                 />
 
                 <p className="mt-1.5 text-xs text-slate-400">
-                  Separate multiple
-                  labels with commas.
+                  Separate multiple labels with commas.
                 </p>
               </div>
 
-
-              <div className="rounded-lg bg-slate-50 p-4">
+              <div className="rounded-lg bg-slate-50 p-3 sm:p-4">
                 <p className="text-xs font-medium text-slate-400">
                   Current Assignee
                 </p>
 
                 <div className="mt-2 flex items-center gap-3">
-                  {task.assignee &&
-                  typeof task.assignee ===
-                    "object" ? (
+                  {task.assignee && typeof task.assignee === "object" ? (
                     <>
-                      {task.assignee
-                        .avatar ? (
+                      {task.assignee.avatar ? (
                         <img
-                          src={
-                            task
-                              .assignee
-                              .avatar
-                          }
-                          alt={
-                            task
-                              .assignee
-                              .name ||
-                            "Assigned employee"
-                          }
+                          src={task.assignee.avatar}
+                          alt={task.assignee.name || "Assigned employee"}
                           className="h-9 w-9 rounded-full object-cover"
                         />
                       ) : (
                         <div className="flex h-9 w-9 items-center justify-center rounded-full bg-indigo-100 text-sm font-semibold text-indigo-700">
-                          {task.assignee.name
-                            ?.charAt(
-                              0,
-                            )
-                            .toUpperCase() ||
-                            "?"}
+                          {task.assignee.name?.charAt(0).toUpperCase() || "?"}
                         </div>
                       )}
 
                       <div>
                         <p className="text-sm font-semibold text-slate-800">
-                          {task.assignee
-                            .name ||
-                            "Unknown employee"}
+                          {task.assignee.name || "Unknown employee"}
                         </p>
 
-                        {task.assignee
-                          .email && (
+                        {task.assignee.email && (
                           <p className="text-xs text-slate-500">
-                            {
-                              task
-                                .assignee
-                                .email
-                            }
+                            {task.assignee.email}
                           </p>
                         )}
                       </div>
@@ -1084,55 +951,41 @@ const TaskDetailsModal = ({
                       </div>
 
                       <p className="text-sm text-slate-500">
-                        No employee
-                        assigned
+                        No employee assigned
                       </p>
                     </>
                   )}
                 </div>
               </div>
 
-
               <div className="rounded-lg bg-slate-50 p-4">
                 <div className="grid grid-cols-1 gap-4 text-sm sm:grid-cols-3">
                   <div>
-                    <p className="text-xs text-slate-400">
-                      Created
-                    </p>
+                    <p className="text-xs text-slate-400">Created</p>
 
                     <p className="mt-1 font-medium text-slate-700">
                       {task.createdAt
-                        ? new Date(
-                            task.createdAt,
-                          ).toLocaleDateString()
+                        ? new Date(task.createdAt).toLocaleDateString()
                         : "—"}
                     </p>
                   </div>
 
                   <div>
-                    <p className="text-xs text-slate-400">
-                      Last updated
-                    </p>
+                    <p className="text-xs text-slate-400">Last updated</p>
 
                     <p className="mt-1 font-medium text-slate-700">
                       {task.updatedAt
-                        ? new Date(
-                            task.updatedAt,
-                          ).toLocaleDateString()
+                        ? new Date(task.updatedAt).toLocaleDateString()
                         : "—"}
                     </p>
                   </div>
 
                   <div>
-                    <p className="text-xs text-slate-400">
-                      Due date
-                    </p>
+                    <p className="text-xs text-slate-400">Due date</p>
 
                     <p className="mt-1 font-medium text-slate-700">
                       {task.dueDate
-                        ? new Date(
-                            task.dueDate,
-                          ).toLocaleDateString()
+                        ? new Date(task.dueDate).toLocaleDateString()
                         : "No due date"}
                     </p>
                   </div>
@@ -1140,17 +993,15 @@ const TaskDetailsModal = ({
               </div>
             </div>
 
-
-            <div className="mt-8 border-t border-slate-200 pt-6">
-              <div className="mb-4 flex items-center justify-between">
+            <div className="mt-6 border-t border-slate-200 pt-5 sm:mt-8 sm:pt-6">
+              <div className="mb-4 flex items-start justify-between gap-3">
                 <div>
                   <h3 className="text-base font-semibold text-slate-900">
                     Comments
                   </h3>
 
                   <p className="mt-1 text-xs text-slate-500">
-                    Discuss this task with
-                    your project team.
+                    Discuss this task with your project team.
                   </p>
                 </div>
 
@@ -1165,31 +1016,20 @@ const TaskDetailsModal = ({
                 </div>
               )}
 
-
               <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
-                <div className="flex gap-3">
-                  <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-indigo-100 text-sm font-semibold text-indigo-700">
-                    {currentUser?.name
-                      ?.charAt(0)
-                      .toUpperCase() ||
-                      "U"}
+                <div className="flex gap-2 sm:gap-3">
+                  <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-indigo-100 text-xs font-semibold text-indigo-700 sm:h-9 sm:w-9 sm:text-sm">
+                    {currentUser?.name?.charAt(0).toUpperCase() || "U"}
                   </div>
 
                   <div className="min-w-0 flex-1">
                     <textarea
                       value={commentText}
-                      onChange={(e) =>
-                        setCommentText(
-                          e.target
-                            .value,
-                        )
-                      }
+                      onChange={(e) => setCommentText(e.target.value)}
                       rows={3}
                       maxLength={2000}
                       placeholder="Write a comment..."
-                      disabled={
-                        addingComment
-                      }
+                      disabled={addingComment}
                       className="w-full resize-none rounded-lg border border-slate-200 bg-white px-3 py-2.5 text-sm outline-none transition focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100 disabled:bg-slate-100"
                     />
 
@@ -1201,279 +1041,186 @@ const TaskDetailsModal = ({
 
                       <button
                         type="button"
-                        onClick={
-                          handleAddComment
-                        }
-                        disabled={
-                          addingComment ||
-                          !commentText.trim()
-                        }
+                        onClick={handleAddComment}
+                        disabled={addingComment || !commentText.trim()}
                         className="rounded-lg bg-indigo-600 px-4 py-2 text-xs font-semibold text-white transition hover:bg-indigo-700 disabled:cursor-not-allowed disabled:opacity-50"
                       >
-                        {addingComment
-                          ? "Adding..."
-                          : "Add Comment"}
+                        {addingComment ? "Adding..." : "Add Comment"}
                       </button>
                     </div>
                   </div>
                 </div>
               </div>
 
-
               <div className="mt-5 space-y-4">
                 {loadingComments ? (
                   <>
-                    {[1, 2].map(
-                      (item) => (
-                        <div
-                          key={item}
-                          className="flex animate-pulse gap-3"
-                        >
-                          <div className="h-9 w-9 rounded-full bg-slate-200" />
+                    {[1, 2].map((item) => (
+                      <div key={item} className="flex animate-pulse gap-3">
+                        <div className="h-9 w-9 rounded-full bg-slate-200" />
 
-                          <div className="flex-1">
-                            <div className="h-4 w-32 rounded bg-slate-200" />
+                        <div className="flex-1">
+                          <div className="h-4 w-32 rounded bg-slate-200" />
 
-                            <div className="mt-2 h-12 rounded-lg bg-slate-100" />
-                          </div>
+                          <div className="mt-2 h-12 rounded-lg bg-slate-100" />
                         </div>
-                      ),
-                    )}
+                      </div>
+                    ))}
                   </>
-                ) : comments.length ===
-                  0 ? (
+                ) : comments.length === 0 ? (
                   <div className="rounded-xl border border-dashed border-slate-300 p-8 text-center">
-                    <div className="text-2xl">
-                      💬
-                    </div>
+                    <div className="text-2xl">💬</div>
 
                     <p className="mt-2 text-sm font-medium text-slate-700">
                       No comments yet
                     </p>
 
                     <p className="mt-1 text-xs text-slate-400">
-                      Be the first to
-                      comment on this
-                      task.
+                      Be the first to comment on this task.
                     </p>
                   </div>
                 ) : (
-                  comments.map(
-                    (comment) => {
-                      const author =
-                        typeof comment.author ===
-                        "object"
-                          ? comment.author
-                          : null;
+                  comments.map((comment) => {
+                    const author =
+                      typeof comment.author === "object"
+                        ? comment.author
+                        : null;
 
-                      const authorName =
-                        author?.name ||
-                        "Unknown user";
+                    const authorName = author?.name || "Unknown user";
 
-                      const isEditing =
-                        editingCommentId ===
-                        comment._id;
+                    const isEditing = editingCommentId === comment._id;
 
-                      return (
-                        <div
-                          key={
-                            comment._id
-                          }
-                          className="flex gap-3"
-                        >
-                          {author?.avatar ? (
-                            <img
-                              src={
-                                author.avatar
-                              }
-                              alt={
-                                authorName
-                              }
-                              className="h-9 w-9 shrink-0 rounded-full object-cover"
-                            />
+                    return (
+                      <div key={comment._id} className="flex gap-3">
+                        {author?.avatar ? (
+                          <img
+                            src={author.avatar}
+                            alt={authorName}
+                            className="h-9 w-9 shrink-0 rounded-full object-cover"
+                          />
+                        ) : (
+                          <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-slate-100 text-sm font-semibold text-slate-600">
+                            {authorName.charAt(0).toUpperCase()}
+                          </div>
+                        )}
+
+                        <div className="min-w-0 flex-1">
+                          <div className="flex flex-wrap items-center gap-2">
+                            <p className="text-sm font-semibold text-slate-800">
+                              {authorName}
+                            </p>
+
+                            {author?.role && (
+                              <span className="rounded-full bg-slate-100 px-2 py-0.5 text-[10px] font-medium capitalize text-slate-500">
+                                {author.role}
+                              </span>
+                            )}
+
+                            <span className="text-xs text-slate-400">
+                              {formatCommentDate(comment.createdAt)}
+                            </span>
+                          </div>
+
+                          {isEditing ? (
+                            <div className="mt-2">
+                              <textarea
+                                value={editingCommentText}
+                                onChange={(e) =>
+                                  setEditingCommentText(e.target.value)
+                                }
+                                rows={3}
+                                maxLength={2000}
+                                className="w-full resize-none rounded-lg border border-indigo-300 px-3 py-2.5 text-sm outline-none focus:ring-2 focus:ring-indigo-100"
+                              />
+
+                              <div className="mt-2 flex gap-2">
+                                <button
+                                  type="button"
+                                  onClick={() => handleSaveComment(comment._id)}
+                                  disabled={savingCommentId === comment._id}
+                                  className="rounded-lg bg-indigo-600 px-3 py-1.5 text-xs font-semibold text-white hover:bg-indigo-700 disabled:opacity-50"
+                                >
+                                  {savingCommentId === comment._id
+                                    ? "Saving..."
+                                    : "Save"}
+                                </button>
+
+                                <button
+                                  type="button"
+                                  onClick={handleCancelEditComment}
+                                  disabled={savingCommentId === comment._id}
+                                  className="rounded-lg border border-slate-200 px-3 py-1.5 text-xs font-medium text-slate-600 hover:bg-slate-50"
+                                >
+                                  Cancel
+                                </button>
+                              </div>
+                            </div>
                           ) : (
-                            <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-slate-100 text-sm font-semibold text-slate-600">
-                              {authorName
-                                .charAt(
-                                  0,
-                                )
-                                .toUpperCase()}
+                            <div className="mt-1 rounded-lg bg-slate-50 px-3 py-2.5">
+                              <p className="whitespace-pre-wrap break-words text-sm leading-6 text-slate-700">
+                                {comment.content}
+                              </p>
                             </div>
                           )}
 
-                          <div className="min-w-0 flex-1">
-                            <div className="flex flex-wrap items-center gap-2">
-                              <p className="text-sm font-semibold text-slate-800">
-                                {
-                                  authorName
-                                }
-                              </p>
-
-                              {author?.role && (
-                                <span className="rounded-full bg-slate-100 px-2 py-0.5 text-[10px] font-medium capitalize text-slate-500">
-                                  {
-                                    author.role
+                          {!isEditing && (
+                            <div className="mt-2 flex gap-3">
+                              {canEditComment(comment) && (
+                                <button
+                                  type="button"
+                                  onClick={() =>
+                                    handleStartEditComment(comment)
                                   }
-                                </span>
+                                  className="text-xs font-medium text-slate-500 hover:text-indigo-600"
+                                >
+                                  Edit
+                                </button>
                               )}
 
-                              <span className="text-xs text-slate-400">
-                                {formatCommentDate(
-                                  comment.createdAt,
-                                )}
-                              </span>
+                              {canDeleteComment(comment) && (
+                                <button
+                                  type="button"
+                                  onClick={() =>
+                                    handleDeleteComment(comment._id)
+                                  }
+                                  disabled={deletingCommentId === comment._id}
+                                  className="text-xs font-medium text-slate-500 hover:text-red-600 disabled:opacity-50"
+                                >
+                                  {deletingCommentId === comment._id
+                                    ? "Deleting..."
+                                    : "Delete"}
+                                </button>
+                              )}
                             </div>
-
-                            {isEditing ? (
-                              <div className="mt-2">
-                                <textarea
-                                  value={
-                                    editingCommentText
-                                  }
-                                  onChange={(
-                                    e,
-                                  ) =>
-                                    setEditingCommentText(
-                                      e
-                                        .target
-                                        .value,
-                                    )
-                                  }
-                                  rows={3}
-                                  maxLength={
-                                    2000
-                                  }
-                                  className="w-full resize-none rounded-lg border border-indigo-300 px-3 py-2.5 text-sm outline-none focus:ring-2 focus:ring-indigo-100"
-                                />
-
-                                <div className="mt-2 flex gap-2">
-                                  <button
-                                    type="button"
-                                    onClick={() =>
-                                      handleSaveComment(
-                                        comment._id,
-                                      )
-                                    }
-                                    disabled={
-                                      savingCommentId ===
-                                      comment._id
-                                    }
-                                    className="rounded-lg bg-indigo-600 px-3 py-1.5 text-xs font-semibold text-white hover:bg-indigo-700 disabled:opacity-50"
-                                  >
-                                    {savingCommentId ===
-                                    comment._id
-                                      ? "Saving..."
-                                      : "Save"}
-                                  </button>
-
-                                  <button
-                                    type="button"
-                                    onClick={
-                                      handleCancelEditComment
-                                    }
-                                    disabled={
-                                      savingCommentId ===
-                                      comment._id
-                                    }
-                                    className="rounded-lg border border-slate-200 px-3 py-1.5 text-xs font-medium text-slate-600 hover:bg-slate-50"
-                                  >
-                                    Cancel
-                                  </button>
-                                </div>
-                              </div>
-                            ) : (
-                              <div className="mt-1 rounded-lg bg-slate-50 px-3 py-2.5">
-                                <p className="whitespace-pre-wrap break-words text-sm leading-6 text-slate-700">
-                                  {
-                                    comment.content
-                                  }
-                                </p>
-                              </div>
-                            )}
-
-
-                            {!isEditing && (
-                              <div className="mt-2 flex gap-3">
-                                {canEditComment(
-                                  comment,
-                                ) && (
-                                  <button
-                                    type="button"
-                                    onClick={() =>
-                                      handleStartEditComment(
-                                        comment,
-                                      )
-                                    }
-                                    className="text-xs font-medium text-slate-500 hover:text-indigo-600"
-                                  >
-                                    Edit
-                                  </button>
-                                )}
-
-                                {canDeleteComment(
-                                  comment,
-                                ) && (
-                                  <button
-                                    type="button"
-                                    onClick={() =>
-                                      handleDeleteComment(
-                                        comment._id,
-                                      )
-                                    }
-                                    disabled={
-                                      deletingCommentId ===
-                                      comment._id
-                                    }
-                                    className="text-xs font-medium text-slate-500 hover:text-red-600 disabled:opacity-50"
-                                  >
-                                    {deletingCommentId ===
-                                    comment._id
-                                      ? "Deleting..."
-                                      : "Delete"}
-                                  </button>
-                                )}
-                              </div>
-                            )}
-                          </div>
+                          )}
                         </div>
-                      );
-                    },
-                  )
+                      </div>
+                    );
+                  })
                 )}
               </div>
             </div>
 
-
-            <div className="mt-8 flex flex-col-reverse gap-3 border-t border-slate-100 pt-5 sm:flex-row sm:items-center sm:justify-between">
+            <div className="mt-6 flex flex-col-reverse gap-3 border-t border-slate-100 pt-5 sm:mt-8 sm:flex-row sm:items-center sm:justify-between">
               {canDeleteTask ? (
                 <button
                   type="button"
-                  onClick={
-                    handleDelete
-                  }
-                  disabled={
-                    loading ||
-                    deleting
-                  }
-                  className="rounded-lg border border-red-200 bg-white px-4 py-2.5 text-sm font-medium text-red-600 hover:bg-red-50 disabled:opacity-50"
+                  onClick={handleDelete}
+                  disabled={loading || deleting}
+                  className="w-full rounded-lg border border-red-200 bg-white px-4 py-2.5 text-sm font-medium text-red-600 hover:bg-red-50 disabled:opacity-50 sm:w-auto"
                 >
-                  {deleting
-                    ? "Deleting..."
-                    : "Delete Task"}
+                  {deleting ? "Deleting..." : "Delete Task"}
                 </button>
               ) : (
                 <div />
               )}
 
-              <div className="flex gap-3">
+              <div className="flex w-full flex-col gap-2 sm:w-auto sm:flex-row sm:gap-3">
                 <button
                   type="button"
                   onClick={onClose}
-                  disabled={
-                    loading ||
-                    deleting
-                  }
-                  className="rounded-lg border border-slate-200 bg-white px-4 py-2.5 text-sm font-medium text-slate-600 hover:bg-slate-50 disabled:opacity-50"
+                  disabled={loading || deleting}
+                  className="w-full rounded-lg border border-slate-200 bg-white px-4 py-2.5 text-sm font-medium text-slate-600 hover:bg-slate-50 disabled:opacity-50 sm:w-auto"
                 >
                   Close
                 </button>
@@ -1481,15 +1228,10 @@ const TaskDetailsModal = ({
                 {canEditTask && (
                   <button
                     type="submit"
-                    disabled={
-                      loading ||
-                      deleting
-                    }
-                    className="rounded-lg bg-indigo-600 px-5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-700 disabled:opacity-60"
+                    disabled={loading || deleting}
+                    className="w-full rounded-lg bg-indigo-600 px-5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-700 disabled:opacity-60 sm:w-auto"
                   >
-                    {loading
-                      ? "Saving..."
-                      : "Save Changes"}
+                    {loading ? "Saving..." : "Save Changes"}
                   </button>
                 )}
               </div>
